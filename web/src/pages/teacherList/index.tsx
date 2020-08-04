@@ -1,5 +1,6 @@
 import React from 'react';
 import PageHeader from '../../components/pageHeader';
+import TeacherItem from '../../components/teacherItem';
 
 import './styles.css';
 
@@ -24,6 +25,10 @@ function TeacherList() {
           </div>
         </form>
       </PageHeader>
+
+      <main>
+        <TeacherItem />
+      </main>
     </div>
   )
 }
