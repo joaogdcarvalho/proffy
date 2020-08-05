@@ -1,15 +1,21 @@
 import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/pageHeader';
-import Input from '../../components/input';
+import Input 
+from '../../components/input'
+;
 import warningIcon from '../../assets/images/icons/warning.svg';
 
 import TextArea from '../../components/textArea';
 import Select from '../../components/select';
+import api from '../../services/api';
 
 import './styles.css';
 
 function TeacherForm() {
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -29,17 +35,36 @@ function TeacherForm() {
     ]);
   }
 
+  function setScheduleItemValue(position: number, field: string, value: string){
+    const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => {
+      if (index === position) {
+        return { ...scheduleItem, [field]: value };
+      }
+
+      return scheduleItem;
+    });
+
+    setScheduleItems(updatedScheduleItems);
+  }
+
   function handleCreateClass(e: FormEvent) {
     e.preventDefault();
-    
-    console.log({
+
+    api.post('classes', {
       name,
       avatar,
       whatsapp,
       bio,
       subject,
-      cost
-    });
+      cost: Number(cost),
+      schedule: scheduleItems
+    }).then(() => {
+      alert('Cadastro realizado com sucesso!');
+
+      history.push('/');
+    }).catch(() => {
+      alert('Erro no cadastro!');
+    })
   }
 
   return (
@@ -54,6 +79,7 @@ function TeacherForm() {
             <legend>Seus dados</legend>
 
             <Input 
+
               name="name"
               label="Nome completo" 
               value={name}
@@ -61,6 +87,7 @@ function TeacherForm() {
             />
 
             <Input 
+
               name="avatar" 
               label="Avatar"
               value={avatar}
@@ -68,7 +95,8 @@ function TeacherForm() {
             />
 
             <Input
-              name="whatsapp"
+
+name="whatsapp"
               label="Whatsapp"
               value={whatsapp}
               onChange={(e) => { setWhatsapp(e.target.value) }}
@@ -106,7 +134,8 @@ function TeacherForm() {
             />
 
             <Input
-              name="cost"
+
+name="cost"
               label="Custo da sua hora por aula"
               value={cost}
               onChange={(e) => { setCost(e.target.value) }}
@@ -122,12 +151,15 @@ function TeacherForm() {
               </button>
             </legend>
 
-            {scheduleItems.map(scheduleItem => {
+            {scheduleItems.map((scheduleItem, index) => {
               return (
                 <div key={scheduleItem.week_day} className="schedule-item">
+                  
                   <Select
                     name="week_day"
                     label="Dia da semana"
+                    value={scheduleItem.week_day}
+                    onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
                     options={[
                       { value: '0', label: 'Domingo' },
                       { value: '1', label: 'Segunda-feira' },
@@ -138,8 +170,23 @@ function TeacherForm() {
                       { value: '6', label: 'Sábado' },
                     ]}
                   />
-                  <Input name="from" label="Das" type="time" />
-                  <Input name="to" label="Até" type="time" />
+                  
+                  <Input 
+                    name="from"
+                    label="Das"
+                    type="time"
+                    value={scheduleItem.from}
+                    onChange={e => setScheduleItemValue(index, 'from', e.target.value)}
+                  />
+                  
+                  <Input 
+                    name="to"
+                    label="Até"
+                    type="time"
+                    value={scheduleItem.to}
+                    onChange={e => setScheduleItemValue(index, 'to', e.target.value)}
+                  />
+
                 </div>
               )
             })}
