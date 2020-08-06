@@ -55,6 +55,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
+  totalConnections: {
+    fontFamily: 'Poppins_400Regular',
+    color: '#D4C2FF',
+    fontSize: 12,
+    lineHeight: 20,
+    maxWidth: 140,
+    marginTop: 40,
+  },
+
 });
 
 export default styles;
