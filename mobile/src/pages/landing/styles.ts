@@ -26,6 +26,35 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_600SemiBold',
   },
 
+  buttonsContainer: {
+    flexDirection: 'row',
+    marginTop: 40,
+    justifyContent: 'space-between',
+  },
+
+  button: {
+    height: 150,
+    width: '48%',
+    backgroundColor: '#333',
+    borderRadius: 8,
+    padding: 24,
+    justifyContent: 'space-between',
+  },
+
+  buttonPrimary: {
+    backgroundColor: '#9871F5',
+  },
+
+  buttonSecondary: {
+    backgroundColor: '#04d361',
+  },
+
+  buttonText: {
+    fontFamily: 'Archivo_700Bold',
+    color: '#FFF',
+    fontSize: 20,
+  },
+
 });
 
 export default styles;
