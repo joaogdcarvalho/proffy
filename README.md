@@ -1,2 +1,2 @@
-# proffy
-Sua plataforma de estudos online. #NLW2
+# NEXT LEVEL WEEK - EDIÇÃO 02 | PROFFY
+Sua plataforma de estudos online.
