@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "axios": "^0.21.2",
     "elliptic": "^6.5.4",
+    "nth-check": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
