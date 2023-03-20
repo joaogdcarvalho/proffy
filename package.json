@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "trim-newlines": "^4.0.2"
+    "trim-newlines": "^5.0.0"
   }
 }
